@@ -18,11 +18,15 @@
 ```python
 me = {
     "name"      : "Ananya Kapoor",
-    "degree"    : ["MSc Artificial Intelligence @ NTU Singapore (Aug 2026)",
+
+    "education"    : ["MSc Artificial Intelligence @ NTU Singapore (Aug 2026)",
                    "BComp Computer Science (Hons, Highest Distinction) @ NTU Singapore"],
     "exchange"  : "Rice University, Houston TX — sole NTU representative",
-    "focus"     : ["LLM Apps & RAG", "NLP", "Graph ML", "Time-Series Forecasting"],
-    "experience": "5 internships across AI · Data Science · Algorithms · Full-Stack",
+
+    "focus"     : ["LLM Apps & RAG", "", "Graph ML", "Time-Series Forecasting", "AI X Finance", "Quant"],
+
+    "experience": "internships across AI · Data Science · Algorithms · Full-Stack",
+
     "highlights": [
         "Johnson & Johnson  |  Thales  |  Kinder Institute @ Rice University",
         "Finalist — NTU Women in Tech Hackathon (×2)",
