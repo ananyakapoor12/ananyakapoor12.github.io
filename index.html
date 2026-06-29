@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ananya_kapoor.ipynb — JupyterLab</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --jup-bg:#ffffff;
+  --jup-chrome:#f5f5f5;
+  --jup-chrome2:#efefef;
+  --jup-sidebar:#fafafa;
+  --jup-border:#e0e0e0;
+  --jup-border2:#d0d0d0;
+  --jup-hover:#e8e8e8;
+  --jup-active:#dce8f7;
+  --jup-text:#1a1a1a;
+  --jup-text2:#444;
+  --jup-text3:#888;
+  --jup-orange:#f57c00;
+  --jup-orange-light:#fff3e0;
+  --jup-orange-border:#ffe0b2;
+  --jup-blue:#1565c0;
+  --jup-blue-light:#e3f2fd;
+  --jup-blue-border:#bbdefb;
+  --jup-blue-mid:#1976d2;
+  --out-bg:#f8f9fa;
+  --out-border:#e8e8e8;
+  --syn-kw:#7c4dff;
+  --syn-fn:#0d47a1;
+  --syn-str:#2e7d32;
+  --syn-num:#e65100;
+  --syn-cmt:#9e9e9e;
+  --syn-cls:#ad1457;
+  --syn-attr:#00695c;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',sans-serif;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--jup-bg);color:var(--jup-text);font-family:var(--sans);}
+
+/* ── MENU BAR ── */
+#menubar{
+  height:36px;background:var(--jup-chrome);
+  border-bottom:1px solid var(--jup-border);
+  display:flex;align-items:center;padding:0 12px;gap:0;
+  flex-shrink:0;position:relative;z-index:50;
+}
+.menu-logo{
+  display:flex;align-items:center;gap:8px;
+  padding-right:16px;border-right:1px solid var(--jup-border2);margin-right:8px;
+}
+.menu-logo-icon{
+  width:22px;height:22px;border-radius:4px;
+  background:linear-gradient(135deg,#f57c00,#ef6c00);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:#fff;font-family:var(--sans);
+}
+.menu-logo-text{font-size:13px;font-weight:600;color:#333;}
+.menu-item{
+  padding:0 10px;height:36px;display:flex;align-items:center;
+  font-size:12px;color:#555;cursor:pointer;transition:background 0.1s;
+}
+.menu-item:hover{background:var(--jup-hover);}
+.menu-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#kernel-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:#666;}
+#kernel-dot{width:8px;height:8px;border-radius:50%;background:#4caf50;transition:background 0.3s;}
+#kernel-dot.busy{background:#f57c00;animation:kpulse 0.8s ease-in-out infinite alternate;}
+@keyframes kpulse{from{opacity:1}to{opacity:0.3}}
+
+/* ── TOOLBAR ── */
+#toolbar{
+  height:38px;background:var(--jup-chrome);
+  border-bottom:1px solid var(--jup-border);
+  display:flex;align-items:center;padding:0 10px;gap:4px;flex-shrink:0;
+}
+.tb-btn{
+  height:28px;padding:0 8px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#555;font-size:12px;
+  border:none;background:transparent;transition:background 0.1s;
+  font-family:var(--sans);
+}
+.tb-btn:hover{background:var(--jup-hover);}
+.tb-btn svg{width:14px;height:14px;fill:currentColor;}
+.tb-sep{width:1px;height:20px;background:var(--jup-border2);margin:0 4px;}
+.tb-cell-type{
+  height:26px;padding:0 8px;border:1px solid var(--jup-border2);border-radius:4px;
+  font-size:11px;color:#555;background:var(--jup-bg);font-family:var(--sans);cursor:pointer;
+}
+#run-all-btn{
+  height:28px;padding:0 14px;border-radius:4px;
+  background:var(--jup-orange);color:#fff;
+  font-size:11px;font-weight:600;cursor:pointer;
+  border:none;font-family:var(--sans);display:flex;align-items:center;gap:5px;
+  transition:background 0.15s;
+}
+#run-all-btn:hover{background:#e65100;}
+#run-hint{
+  margin-left:12px;font-size:11px;color:var(--jup-orange);
+  font-family:var(--sans);font-weight:500;
+  background:var(--jup-orange-light);border:1px solid var(--jup-orange-border);
+  padding:3px 10px;border-radius:4px;
+  animation:hint-pulse 2s ease-in-out 3;
+}
+@keyframes hint-pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+#run-hint.done{display:none;}
+
+/* ── TAB BAR ── */
+#tabbar{
+  height:32px;background:var(--jup-chrome2);
+  border-bottom:1px solid var(--jup-border);
+  display:flex;align-items:flex-end;padding:0 8px;
+  flex-shrink:0;
+}
+.nb-tab{
+  display:flex;align-items:center;gap:6px;
+  padding:0 14px 0 10px;height:28px;
+  background:var(--jup-bg);
+  border:1px solid var(--jup-border);border-bottom:none;
+  border-radius:4px 4px 0 0;
+  font-size:12px;color:#333;font-family:var(--mono);
+  cursor:pointer;position:relative;bottom:-1px;
+}
+.nb-tab-dot{
+  width:11px;height:11px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(135deg,#f57c00,#ef6c00);
+}
+.nb-tab-close{
+  margin-left:6px;color:#aaa;font-size:15px;line-height:1;
+  width:16px;height:16px;display:flex;align-items:center;justify-content:center;
+  border-radius:2px;transition:all 0.1s;
+}
+.nb-tab-close:hover{background:var(--jup-hover);color:#555;}
+
+/* ── LAYOUT ── */
+#layout{display:flex;height:calc(100vh - 106px);}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:240px;min-width:240px;
+  background:var(--jup-sidebar);
+  border-right:1px solid var(--jup-border);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sidebar-tab{
+  height:34px;border-bottom:1px solid var(--jup-border);
+  display:flex;align-items:center;padding:0 12px;gap:8px;
+  font-size:11px;color:#555;font-weight:600;letter-spacing:0.4px;
+  background:var(--jup-chrome2);text-transform:uppercase;
+}
+.sidebar-tab-icon{
+  width:14px;height:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:#888;
+}
+.file-tree{flex:1;overflow-y:auto;padding:6px 0;}
+.file-tree::-webkit-scrollbar{width:4px;}
+.file-tree::-webkit-scrollbar-thumb{background:var(--jup-border2);border-radius:2px;}
+.folder-label{
+  display:flex;align-items:center;gap:5px;padding:4px 10px;
+  font-size:12px;color:#444;cursor:pointer;transition:background 0.1s;
+}
+.folder-label:hover{background:var(--jup-hover);}
+.folder-arrow{font-size:10px;color:#888;}
+.folder-name{font-family:var(--mono);font-size:11px;color:#333;}
+.file-item{
+  display:flex;align-items:center;gap:6px;
+  padding:4px 10px 4px 24px;
+  font-size:11px;font-family:var(--mono);color:#555;
+  cursor:pointer;transition:background 0.1s,color 0.1s;
+  text-decoration:none;
+}
+.file-item:hover{background:var(--jup-hover);color:#222;}
+.file-item.active{background:var(--jup-active);color:var(--jup-blue);}
+.fi-ipynb{color:#f57c00;font-size:9px;}
+.fi-py{color:#1565c0;font-size:9px;}
+.fi-md{color:#2e7d32;font-size:9px;}
+.fi-link{color:#ad1457;font-size:9px;}
+.sidebar-info{
+  border-top:1px solid var(--jup-border);padding:10px 12px;
+  font-size:10px;font-family:var(--mono);color:#888;background:var(--jup-chrome2);
+}
+.si-row{display:flex;justify-content:space-between;margin-bottom:3px;}
+.si-key{color:#aaa;}
+.si-val{color:#1565c0;}
+
+/* ── NOTEBOOK AREA ── */
+#notebook-area{
+  flex:1;overflow-y:auto;overflow-x:hidden;background:var(--jup-bg);
+  scrollbar-width:thin;scrollbar-color:var(--jup-border) transparent;
+}
+#notebook-area::-webkit-scrollbar{width:6px;}
+#notebook-area::-webkit-scrollbar-thumb{background:var(--jup-border2);border-radius:3px;}
+
+#nb-header{padding:16px 72px 10px;border-bottom:1px solid var(--jup-border);margin-bottom:4px;}
+#nb-title{font-size:15px;font-weight:500;color:#1a1a1a;font-family:var(--mono);margin-bottom:3px;}
+#nb-meta{font-size:11px;color:#888;font-family:var(--mono);}
+
+/* ── CELLS ── */
+.cell{
+  display:flex;align-items:stretch;
+  padding:2px 20px 2px 0;
+  border-left:3px solid transparent;cursor:default;
+  transition:border-color 0.15s;
+}
+.cell:hover{border-left-color:var(--jup-border2);}
+.cell.focused{border-left-color:var(--jup-blue);}
+.cell.running{border-left-color:var(--jup-orange);}
+
+.cell-gutter{
+  width:72px;min-width:72px;
+  display:flex;flex-direction:column;align-items:flex-end;
+  padding:10px 8px 10px 0;font-family:var(--mono);font-size:11px;
+  color:#aaa;flex-shrink:0;
+}
+.exec-num{white-space:nowrap;transition:color 0.2s;}
+.exec-num.done{color:#888;}
+.exec-num.running{color:var(--jup-orange);}
+.run-btn-inline{
+  width:22px;height:22px;border-radius:3px;
+  background:transparent;border:1px solid var(--jup-border2);
+  color:#aaa;font-size:9px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+  margin-top:4px;transition:all 0.15s;flex-shrink:0;
+}
+.cell:hover .run-btn-inline{display:flex;}
+.run-btn-inline:hover{background:var(--jup-orange);border-color:var(--jup-orange);color:#fff;}
+
+.cell-inner{flex:1;min-width:0;}
+.cell-input{
+  border-radius:4px;border:1px solid var(--jup-border);
+  background:#fff;overflow:hidden;transition:border-color 0.15s,box-shadow 0.15s;
+}
+.cell.focused .cell-input{border-color:var(--jup-blue-mid);box-shadow:0 0 0 2px rgba(21,101,192,0.08);}
+.cell.running .cell-input{border-color:var(--jup-orange);box-shadow:0 0 0 2px rgba(245,124,0,0.08);}
+
+.cell-toolbar{
+  height:26px;background:var(--jup-chrome2);border-bottom:1px solid var(--jup-border);
+  display:flex;align-items:center;padding:0 8px;gap:6px;opacity:0;transition:opacity 0.15s;
+}
+.cell:hover .cell-toolbar,.cell.focused .cell-toolbar{opacity:1;}
+.ct-badge{font-size:9px;padding:2px 7px;border-radius:3px;font-family:var(--mono);}
+.ct-badge.code{background:var(--jup-blue-light);color:var(--jup-blue);}
+.ct-badge.markdown{background:#e8f5e9;color:#2e7d32;}
+.ct-spacer{flex:1;}
+.ct-run{
+  font-size:10px;color:var(--jup-orange);cursor:pointer;padding:2px 6px;
+  border-radius:3px;background:none;border:1px solid var(--jup-orange-border);
+  font-family:var(--sans);font-weight:500;transition:background 0.1s;
+}
+.ct-run:hover{background:var(--jup-orange-light);}
+
+.cell-code{
+  padding:10px 14px;font-family:var(--mono);font-size:12.5px;
+  line-height:1.75;color:#1a1a1a;white-space:pre;overflow-x:auto;background:#fff;
+}
+.kw{color:var(--syn-kw);font-weight:500;}
+.fn{color:var(--syn-fn);}
+.str{color:var(--syn-str);}
+.num{color:var(--syn-num);}
+.cmt{color:var(--syn-cmt);font-style:italic;}
+.cls{color:var(--syn-cls);}
+.attr{color:var(--syn-attr);}
+
+/* ── OUTPUT ── */
+.cell-output{margin-top:4px;display:none;}
+.cell-output.visible{display:block;}
+.output-label{
+  height:24px;background:var(--jup-chrome2);border:1px solid var(--jup-border);
+  border-bottom:none;border-radius:4px 4px 0 0;
+  display:flex;align-items:center;padding:0 10px;gap:8px;
+  font-size:10px;color:#888;font-family:var(--mono);
+}
+.out-type{color:var(--jup-blue);font-weight:500;}
+.output-body{
+  border:1px solid var(--jup-border);border-radius:0 0 4px 4px;
+  background:var(--out-bg);padding:14px 16px;
+  font-family:var(--sans);font-size:13px;color:var(--jup-text);line-height:1.7;
+}
+.output-body.stdout{
+  font-family:var(--mono);font-size:12px;color:#222;background:#fff;
+  border-left:3px solid var(--jup-orange);
+}
+
+/* ── OUTPUT COMPONENTS ── */
+.out-section{margin-bottom:16px;}
+.out-section:last-child{margin-bottom:0;}
+.out-heading{
+  font-size:13px;font-weight:600;color:#1a1a1a;
+  border-left:3px solid var(--jup-orange);padding-left:8px;
+  margin-bottom:10px;
+}
+.out-point{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:6px 0;border-bottom:1px solid var(--jup-border);
+  font-size:12.5px;color:#333;line-height:1.6;
+}
+.out-point:last-child{border-bottom:none;}
+.out-bullet{color:var(--jup-orange);font-weight:700;flex-shrink:0;margin-top:1px;}
+.out-kv{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid var(--jup-border);}
+.out-kv:last-child{border-bottom:none;}
+.out-key{font-family:var(--mono);font-size:11px;color:#888;width:110px;flex-shrink:0;}
+.out-val{font-size:12.5px;color:#1a1a1a;font-weight:500;}
+.out-val a{color:var(--jup-blue);text-decoration:none;}
+.out-val a:hover{text-decoration:underline;}
+.out-card-grid{display:flex;flex-direction:column;gap:8px;}
+.out-card{
+  border:1px solid var(--jup-border);border-radius:4px;padding:12px 14px;background:#fff;
+  transition:border-color 0.15s;
+}
+.out-card:hover{border-color:var(--jup-blue-border);}
+.out-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;}
+.out-card-title{font-weight:600;font-size:13px;color:var(--jup-blue);}
+.out-card-badge{
+  font-size:10px;padding:2px 7px;border-radius:3px;font-family:var(--mono);
+  background:var(--jup-orange-light);color:var(--jup-orange);border:1px solid var(--jup-orange-border);
+}
+.out-card-desc{font-size:12px;color:#444;line-height:1.6;margin-bottom:8px;}
+.out-card-points{list-style:none;margin-bottom:8px;}
+.out-card-points li{
+  font-size:11.5px;color:#555;padding:3px 0;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.out-card-points li::before{content:"→";color:var(--jup-orange);flex-shrink:0;}
+.out-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.out-tag{
+  font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:3px;
+  background:var(--jup-blue-light);color:var(--jup-blue);border:1px solid var(--jup-blue-border);
+}
+.skill-row{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--jup-border);}
+.skill-row:last-child{border-bottom:none;}
+.skill-cat-label{font-size:10px;font-weight:600;color:var(--jup-orange);letter-spacing:0.5px;text-transform:uppercase;margin:10px 0 4px;font-family:var(--mono);}
+.skill-name{font-family:var(--mono);font-size:11.5px;color:#333;width:160px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:6px;background:var(--jup-border);border-radius:3px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:3px;background:var(--jup-blue);transition:width 1.2s ease;}
+.skill-pct{font-family:var(--mono);font-size:10px;color:#888;width:28px;text-align:right;}
+.timeline{position:relative;padding-left:18px;}
+.timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--jup-border);}
+.tl-item{position:relative;margin-bottom:16px;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{
+  position:absolute;left:-15px;top:5px;width:9px;height:9px;
+  border-radius:50%;background:var(--jup-orange);border:2px solid #fff;
+  box-shadow:0 0 0 1px var(--jup-orange);
+}
+.tl-date{font-size:10px;font-family:var(--mono);color:#999;margin-bottom:3px;}
+.tl-title{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:2px;}
+.tl-org{font-size:12px;color:var(--jup-blue);margin-bottom:5px;}
+.tl-points{list-style:none;}
+.tl-points li{
+  font-size:12px;color:#444;padding:2px 0;
+  display:flex;align-items:flex-start;gap:6px;line-height:1.5;
+}
+.tl-points li::before{content:"·";color:var(--jup-orange);font-weight:700;flex-shrink:0;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+.stat-box{
+  border:1px solid var(--jup-border);border-radius:4px;padding:10px;text-align:center;background:#fff;
+}
+.stat-val{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--jup-orange);}
+.stat-key{font-size:10px;color:#888;margin-top:2px;font-family:var(--mono);}
+.contact-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.contact-link{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:4px;
+  border:1px solid var(--jup-blue-border);background:var(--jup-blue-light);
+  color:var(--jup-blue);font-size:12px;text-decoration:none;font-weight:500;
+  transition:background 0.15s,border-color 0.15s;font-family:var(--sans);
+}
+.contact-link:hover{background:var(--jup-blue-border);border-color:var(--jup-blue);}
+
+/* ── MARKDOWN CELL ── */
+.md-cell .cell-input{background:transparent;border:1px solid transparent;}
+.md-cell:hover .cell-input{border-color:var(--jup-border);}
+.md-rendered{padding:8px 12px;font-family:var(--sans);font-size:13px;line-height:1.7;}
+.md-rendered h1{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid var(--jup-orange);}
+.md-rendered p{color:#444;margin-bottom:6px;}
+.md-rendered code{font-family:var(--mono);font-size:11px;background:var(--jup-chrome2);padding:2px 5px;border-radius:3px;color:var(--syn-kw);}
+.md-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:3px;margin-right:5px;margin-bottom:4px;font-family:var(--mono);}
+
+/* ── RUN INSTRUCTIONS BANNER ── */
+#run-instructions{
+  margin:8px 24px 0;padding:9px 14px;
+  background:var(--jup-orange-light);border:1px solid var(--jup-orange-border);
+  border-radius:4px;font-size:12px;color:#5d2e00;
+  display:flex;align-items:center;gap:10px;
+}
+#run-instructions strong{font-weight:600;color:var(--jup-orange);}
+
+/* ── STATUS BAR ── */
+#statusbar{
+  height:22px;background:var(--jup-orange);
+  border-top:1px solid var(--jup-orange);
+  display:flex;align-items:center;padding:0 14px;gap:12px;
+  font-size:10px;color:#fff;font-family:var(--mono);
+  flex-shrink:0;position:fixed;bottom:0;left:0;right:0;z-index:50;
+}
+#statusbar .sb-sep{color:rgba(255,255,255,0.4);}
+#status-msg{margin-left:auto;color:rgba(255,255,255,0.85);}
+
+/* ── PROGRESS ── */
+#exec-progress{
+  position:fixed;top:106px;left:0;right:0;height:2px;
+  background:var(--jup-orange);width:0%;transition:width 0.3s ease;z-index:100;opacity:0;
+}
+</style>
+</head>
+<body>
+
+<div id="exec-progress"></div>
+
+<!-- MENU BAR -->
+<div id="menubar">
+  <div class="menu-logo">
+    <div class="menu-logo-icon">J</div>
+    <div class="menu-logo-text">JupyterLab</div>
+  </div>
+  <div class="menu-item">File</div>
+  <div class="menu-item">Edit</div>
+  <div class="menu-item">View</div>
+  <div class="menu-item">Run</div>
+  <div class="menu-item">Kernel</div>
+  <div class="menu-item">Help</div>
+  <div class="menu-right">
+    <div id="kernel-indicator">
+      <div id="kernel-dot"></div>
+      <span>Python 3 (ipykernel)</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <button class="tb-btn" title="Save (Ctrl+S)">
+    <svg viewBox="0 0 16 16"><path d="M2 2v12h12V4.5L11.5 2H2zm7 0v4H4V2h5zm3.5 0L14 4.5V14H2V2h2v4h7V2h1.5zM8 6H5V2h3v4zm1 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" fill-rule="evenodd"/></svg>
+  </button>
+  <button class="tb-btn" title="Insert cell below">
+    <svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+  </button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" title="Cut cell">
+    <svg viewBox="0 0 16 16"><path d="M5.5 9a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM8 2L5.5 7.5m0 0L8 13M8 2l2.5 5.5M10.5 7.5L8 13" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
+  </button>
+  <button class="tb-btn" title="Copy cell">
+    <svg viewBox="0 0 16 16"><rect x="4" y="4" width="9" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="2" width="9" height="10" rx="1" fill="var(--jup-bg)" stroke="currentColor" stroke-width="1.3"/></svg>
+  </button>
+  <button class="tb-btn" title="Paste cell">
+    <svg viewBox="0 0 16 16"><path d="M5 2h6v2H5zm-2 1h2v1h6V3h2v11H3V3z" fill="currentColor" opacity="0.7"/></svg>
+  </button>
+  <div class="tb-sep"></div>
+  <button id="run-all-btn" onclick="runAllCells()">&#9654;&#9654;&nbsp; Run All Cells</button>
+  <div id="run-hint">&#8592; Click to run all cells</div>
+  <div class="tb-sep" style="margin-left:auto;"></div>
+  <select class="tb-cell-type">
+    <option>Code</option>
+    <option>Markdown</option>
+    <option>Raw</option>
+  </select>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" title="Restart kernel">
+    <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 0 6 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M14 2v4h-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<!-- TAB BAR -->
+<div id="tabbar">
+  <div class="nb-tab">
+    <div class="nb-tab-dot"></div>
+    ananya_kapoor.ipynb
+    <span class="nb-tab-close">&#215;</span>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div id="layout">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sidebar-tab">
+      <div class="sidebar-tab-icon">
+        <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M2 2h4v4H2zm6 0h4v4H8zM2 8h4v4H2zm6 0h4v4H8z" stroke="#888" stroke-width="1.2"/></svg>
+      </div>
+      File Browser
+    </div>
+    <div class="file-tree">
+      <div class="folder-label">
+        <span class="folder-arrow">&#9660;</span>
+        <span class="folder-name">ananya_kapoor/</span>
+      </div>
+
+      <a class="file-item active" href="#">
+        <span class="fi-ipynb">&#9679;</span> ananya_kapoor.ipynb
+      </a>
+
+      <div class="folder-label" style="padding-left:20px;">
+        <span class="folder-arrow">&#9660;</span>
+        <span class="folder-name">education/</span>
+      </div>
+      <a class="file-item" style="padding-left:36px;" href="https://www.ntu.edu.sg/graduate-college/admissions-programmes/by-colleges/college-of-computing-data-science/master-of-science-in-artificial-intelligence" target="_blank">
+        <span class="fi-md">&#10022;</span> ntu_msc_ai.md
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://www.ntu.edu.sg/education/schools-colleges/school-of-computer-science-engineering" target="_blank">
+        <span class="fi-md">&#10022;</span> ntu_bcomp_cs.md
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://csweb.rice.edu/" target="_blank">
+        <span class="fi-md">&#10022;</span> rice_exchange.md
+      </a>
+
+      <div class="folder-label" style="padding-left:20px;">
+        <span class="folder-arrow">&#9660;</span>
+        <span class="folder-name">projects/</span>
+      </div>
+      <a class="file-item" style="padding-left:36px;" href="https://github.com/ananyakapoor12/NETwork-Oncology_ML" target="_blank">
+        <span class="fi-ipynb">&#9679;</span> cancer_drug_targets.ipynb
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://github.com/ananyakapoor12/Distributed_Banking_System" target="_blank">
+        <span class="fi-py">&#8801;</span> distributed_banking.py
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://github.com/Leonard249/SC4021-project" target="_blank">
+        <span class="fi-ipynb">&#9679;</span> opinion_search_engine.ipynb
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://github.com/weiizhxnng17/SC2079-2025-MDP-Grp22" target="_blank">
+        <span class="fi-py">&#8801;</span> autonomous_robot.py
+      </a>
+
+      <div class="folder-label" style="padding-left:20px;">
+        <span class="folder-arrow">&#9660;</span>
+        <span class="folder-name">experience/</span>
+      </div>
+      <a class="file-item" style="padding-left:36px;" href="https://deepdivelabs.com/" target="_blank">
+        <span class="fi-py">&#8801;</span> deep_dive_labs_ai.py
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://www.jnj.com/" target="_blank">
+        <span class="fi-py">&#8801;</span> jnj_data_science.py
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://www.thalesgroup.com/" target="_blank">
+        <span class="fi-py">&#8801;</span> thales_algorithms.py
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://kinder.rice.edu/" target="_blank">
+        <span class="fi-ipynb">&#9679;</span> rice_research.ipynb
+      </a>
+
+      <div class="folder-label" style="padding-left:20px;margin-top:4px;">
+        <span class="folder-arrow">&#9660;</span>
+        <span class="folder-name">links/</span>
+      </div>
+      <a class="file-item" style="padding-left:36px;" href="https://github.com/ananyakapoor12" target="_blank">
+        <span class="fi-link">&#11041;</span> github_profile.url
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="https://www.linkedin.com/in/ananyakapoor12/" target="_blank">
+        <span class="fi-link">&#11041;</span> linkedin_profile.url
+      </a>
+      <a class="file-item" style="padding-left:36px;" href="mailto:ananya.kapoor.1103@gmail.com">
+        <span class="fi-link">&#11041;</span> contact_email.url
+      </a>
+    </div>
+    <div class="sidebar-info">
+      <div class="si-row"><span class="si-key">python</span><span class="si-val">3.11.4</span></div>
+      <div class="si-row"><span class="si-key">cells run</span><span class="si-val" id="si-cells">0 / 7</span></div>
+      <div class="si-row"><span class="si-key">kernel</span><span class="si-val" id="si-status">idle</span></div>
+    </div>
+  </div>
+
+  <!-- NOTEBOOK -->
+  <div id="notebook-area">
+    <div id="nb-header">
+      <div id="nb-title">ananya_kapoor.ipynb</div>
+      <div id="nb-meta">NTU Singapore &nbsp;·&nbsp; Python 3 &nbsp;·&nbsp; Last saved: just now</div>
+    </div>
+
+    <!-- RUN INSTRUCTIONS -->
+    <div id="run-instructions">
+      <span><strong>How to use:</strong> Click <strong>&#9654; Run</strong> on each cell, or hit <strong>&#9654;&#9654; Run All Cells</strong> in the toolbar above to execute every cell at once. Use <strong>Shift+Enter</strong> to run and advance.</span>
+    </div>
+
+    <!-- ── CELL 0: Markdown header ── -->
+    <div class="cell md-cell" id="cell-0" onclick="focusCell(0)">
+      <div class="cell-gutter"><div class="exec-num done"></div></div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge markdown">Markdown</span><span class="ct-spacer"></span>
+          </div>
+          <div class="md-rendered">
+            <h1>Ananya Kapoor &mdash; Portfolio</h1>
+            <p>
+            <code>MS in AI @ NTU Singapore</code> &nbsp;&middot;&nbsp; Bachelor of Computing (Hons Highest Distinction) from NTU Singapore &nbsp;&middot;&nbsp;
+              Currently seeking <code>AI / ML / Data Science</code> roles.
+            </p>
+            <p>
+              <span class="md-badge" style="background:#fff3e0;color:#e65100;border:1px solid #ffe0b2;">NTU Singapore</span>
+              <span class="md-badge" style="background:#e3f2fd;color:#1565c0;border:1px solid #bbdefb;">AI / ML / NLP</span>
+              <span class="md-badge" style="background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9;">Data Science</span>
+              <span class="md-badge" style="background:#fce4ec;color:#ad1457;border:1px solid #f8bbd9;"> Quant Finance</span>
+              <span class="md-badge" style="background:#f3e5f5;color:#6a1b9a;border:1px solid #e1bee7;">Singapore &middot; India &middot; United States</span>
+            </p>
+            <p style="font-size:11px;color:#999;margin-top:6px;">Run each cell below to explore &nbsp;&middot;&nbsp; or click <strong>&#9654;&#9654; Run All Cells</strong> in the toolbar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 1: Bio / whoami ── -->
+    <div class="cell" id="cell-1" onclick="focusCell(1)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-1">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(1)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(1)">&#9654; Run</button>
+          </div>
+          <div class="cell-code"><span class="kw">import</span> ananya <span class="kw">as</span> me
+<span class="cmt"># Run this cell to load Ananya's profile</span>
+me.<span class="fn">whoami</span>(verbose<span class="op">=</span><span class="kw">True</span>)</div>
+        </div>
+        <div class="cell-output" id="out-1">
+          <div class="output-label"><span class="out-type">Out&nbsp;[1]:</span> &nbsp;stdout &middot; cell 1</div>
+          <div class="output-body" id="ob-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 2: Education ── -->
+    <div class="cell" id="cell-2" onclick="focusCell(2)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-2">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(2)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(2)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="attr">education</span>.<span class="fn">show</span>()</div>
+        </div>
+        <div class="cell-output" id="out-2">
+          <div class="output-label"><span class="out-type">Out&nbsp;[2]:</span> &nbsp;Education &middot; cell 2</div>
+          <div class="output-body" id="ob-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 3: Work Experience ── -->
+    <div class="cell" id="cell-3" onclick="focusCell(3)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-3">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(3)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(3)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="attr">experience</span>.<span class="fn">show</span>(sort<span class="op">=</span><span class="str">'recent'</span>)</div>
+        </div>
+        <div class="cell-output" id="out-3">
+          <div class="output-label"><span class="out-type">Out&nbsp;[3]:</span> &nbsp;WorkExperience &middot; cell 3 &middot; 5 roles</div>
+          <div class="output-body" id="ob-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 4: Projects ── -->
+    <div class="cell" id="cell-4" onclick="focusCell(4)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-4">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(4)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(4)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="attr">projects</span>.<span class="fn">all</span>().<span class="fn">display</span>()</div>
+        </div>
+        <div class="cell-output" id="out-4">
+          <div class="output-label"><span class="out-type">Out&nbsp;[4]:</span> &nbsp;Projects &middot; cell 4 &middot; 4 projects</div>
+          <div class="output-body" id="ob-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 5: Skills ── -->
+    <div class="cell" id="cell-5" onclick="focusCell(5)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-5">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(5)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(5)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="attr">skills</span>.<span class="fn">plot_proficiency</span>(style<span class="op">=</span><span class="str">'bar'</span>)</div>
+        </div>
+        <div class="cell-output" id="out-5">
+          <div class="output-label"><span class="out-type">Out&nbsp;[5]:</span> &nbsp;Figure &middot; cell 5 &middot; skills_matrix.png</div>
+          <div class="output-body" id="ob-5"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 6: Achievements ── -->
+    <div class="cell" id="cell-6" onclick="focusCell(6)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-6">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(6)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(6)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="attr">achievements</span>.<span class="fn">list</span>()</div>
+        </div>
+        <div class="cell-output" id="out-6">
+          <div class="output-label"><span class="out-type">Out&nbsp;[6]:</span> &nbsp;Achievements &middot; cell 6</div>
+          <div class="output-body" id="ob-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CELL 7: Contact ── -->
+    <div class="cell" id="cell-7" onclick="focusCell(7)">
+      <div class="cell-gutter">
+        <div class="exec-num" id="en-7">In&nbsp;[&nbsp;]:</div>
+        <button class="run-btn-inline" onclick="event.stopPropagation();runCell(7)">&#9654;</button>
+      </div>
+      <div class="cell-inner">
+        <div class="cell-input">
+          <div class="cell-toolbar">
+            <span class="ct-badge code">Code</span><span class="ct-spacer"></span>
+            <button class="ct-run" onclick="event.stopPropagation();runCell(7)">&#9654; Run</button>
+          </div>
+          <div class="cell-code">me.<span class="fn">contact</span>()</div>
+        </div>
+        <div class="cell-output" id="out-7">
+          <div class="output-label"><span class="out-type">Out&nbsp;[7]:</span> &nbsp;ContactCard &middot; cell 7</div>
+          <div class="output-body" id="ob-7"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:60px;"></div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div id="statusbar">
+  <span>Python 3</span>
+  <span class="sb-sep">|</span>
+  <span>Trusted</span>
+  <span class="sb-sep">|</span>
+  <span id="cell-count">Cell 0 of 7</span>
+  <span class="sb-sep">|</span>
+  <span>ananya_kapoor.ipynb</span>
+  <div id="status-msg">Kernel ready &mdash; click &#9654; Run on any cell to begin</div>
+</div>
+
+<script>
+const OUTPUTS = {
+  1: {
+    type:'rich',delay:700,
+    html:`
+      <div class="out-section">
+        <div class="out-kv"><span class="out-key">name</span><span class="out-val">Ananya Kapoor</span></div>
+        <div class="out-kv"><span class="out-key">email</span><span class="out-val"><a href="mailto:ananya.kapoor.1103@gmail.com">ananya.kapoor.1103@gmail.com</a></span></div>
+        <div class="out-kv"><span class="out-key">location</span><span class="out-val">Singapore &middot; India &middot; United States</span></div>
+        <div class="out-kv"><span class="out-key">github</span><span class="out-val"><a href="https://github.com/ananyakapoor12" target="_blank">github.com/ananyakapoor12</a></span></div>
+        <div class="out-kv"><span class="out-key">linkedin</span><span class="out-val"><a href="https://www.linkedin.com/in/ananyakapoor12/" target="_blank">linkedin.com/in/ananyakapoor12</a></span></div>
+      </div>
+      <div class="out-section" style="margin-top:14px;">
+        <div class="out-heading">Summary</div>
+        <div class="out-point"><span class="out-bullet">&#8594;</span> MS in AI at NTU Singapore (Aug 2026), with a BComp CS (Hons Highest Distinction).</div>
+        <div class="out-point"><span class="out-bullet">&#8594;</span>5 internships across AI, data science, algorithms, and full-stack development at companies including Johnson &amp; Johnson and Thales.</div>
+        <div class="out-point"><span class="out-bullet">&#8594;</span>Research experience at Rice University's Kinder Institute for Urban Research; sole NTU representative at Rice exchange program.</div>
+        <div class="out-point"><span class="out-bullet">&#8594;</span>Finalist in two NTU Women in Tech hackathons; participated in Morgan Stanley's invite-only Insight Program.</div>
+        <div class="out-point"><span class="out-bullet">&#8594;</span>Open to AI / ML engineering and data science roles from 2026 onward.</div>
+      </div>`
+  },
+  2: {
+    type:'rich',delay:600,
+    html:`
+      <div class="out-card-grid">
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">MSc Artificial Intelligence &mdash; NTU Singapore</span>
+            <span class="out-card-badge">Aug 2026 &ndash; Jun 2027</span>
+          </div>
+          <ul class="out-card-points">
+            <li> August 2026 cohort at College of Computing and Data Science.</li>
+            <li>Focus: advanced ML, deep learning, and AI systems.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">NTU</span><span class="out-tag">AI</span><span class="out-tag">Postgraduate</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">BComp Computer Science &mdash; NTU Singapore</span>
+            <span class="out-card-badge">Aug 2022 &ndash; Jun 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Honours (Highest Distinction).</li>
+            <li>Courses: AI, Data Structures, Algorithms, OS, Databases, Distributed Systems, SE.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">NTU</span><span class="out-tag">Highest Distinction</span><span class="out-tag">Singapore</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">Semester Exchange &mdash; Rice University, Houston TX</span>
+            <span class="out-card-badge">Aug &ndash; Dec 2024</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Sole NTU representative selected for competitive exchange program.</li>
+            <li>Courses: Reinforcement Learning, Machine Learning, Data Visualization, Web Dev.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">Rice University</span><span class="out-tag">RL</span><span class="out-tag">United States</span></div>
+        </div>
+      </div>`
+  },
+  3: {
+    type:'rich',delay:900,
+    html:`
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Mar 2026 &ndash; May 2026</div>
+          <div class="tl-title">AI Intern</div>
+          <div class="tl-org">Deep Dive Labs &nbsp;&middot;&nbsp; Singapore</div>
+          <ul class="tl-points">
+            <li>Built a regulatory intelligence platform using LangChain, OpenAI GPT, and semantic retrieval.</li>
+            <li>Automated extraction and classification of compliance requirements from 180+ regulatory documents across 6 jurisdictions.</li>
+            <li>Created a centralized knowledge repository enabling structured regulatory analysis at scale.</li>
+          </ul>
+          <div class="out-tags" style="margin-top:6px;"><span class="out-tag">LangChain</span><span class="out-tag">OpenAI API</span><span class="out-tag">RAG</span><span class="out-tag">NLP</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Jan 2025 &ndash; Jun 2025</div>
+          <div class="tl-title">Data Science &amp; ML Intern</div>
+          <div class="tl-org">Johnson &amp; Johnson &nbsp;&middot;&nbsp; Singapore</div>
+          <ul class="tl-points">
+            <li>Designed and deployed a short time-series forecasting framework combining statistical and ML models.</li>
+            <li>Built an interactive web application for model evaluation and benchmarking.</li>
+            <li>Increased forecasting accuracy and analytical efficiency by 20%.</li>
+          </ul>
+          <div class="out-tags" style="margin-top:6px;"><span class="out-tag">Time Series</span><span class="out-tag">Scikit-learn</span><span class="out-tag">Forecasting</span><span class="out-tag">+20% accuracy</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#1565c0;box-shadow:0 0 0 1px #1565c0;"></div>
+          <div class="tl-date">Jan 2025 &ndash; Mar 2025</div>
+          <div class="tl-title">Application Developer Intern</div>
+          <div class="tl-org">Happiness Initiative &nbsp;&middot;&nbsp; Singapore</div>
+          <ul class="tl-points">
+            <li>Developed a full-stack well-being intervention app with React, Node.js, and MySQL.</li>
+            <li>Implemented JWT-based authentication; reduced API latency by 35%.</li>
+            <li>Scaled application to support 500+ concurrent users.</li>
+          </ul>
+          <div class="out-tags" style="margin-top:6px;"><span class="out-tag">React</span><span class="out-tag">Node.js</span><span class="out-tag">MySQL</span><span class="out-tag">-35% latency</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#1565c0;box-shadow:0 0 0 1px #1565c0;"></div>
+          <div class="tl-date">Aug &ndash; Dec 2024</div>
+          <div class="tl-title">Undergraduate Researcher</div>
+          <div class="tl-org">Data to Knowledge Lab, Rice University (Kinder Institute) &nbsp;&middot;&nbsp; United States</div>
+          <ul class="tl-points">
+            <li>Designed ML pipeline using PCA and non-linear autoencoders across 1,200+ Texas school districts.</li>
+            <li>Lowered model error by 25%; enabled SHAP-driven policy analysis via an interactive dashboard.</li>
+          </ul>
+          <div class="out-tags" style="margin-top:6px;"><span class="out-tag">PCA</span><span class="out-tag">Autoencoders</span><span class="out-tag">SHAP</span><span class="out-tag">Policy Analysis</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#1565c0;box-shadow:0 0 0 1px #1565c0;"></div>
+          <div class="tl-date">May &ndash; Aug 2024</div>
+          <div class="tl-title">Algorithms Intern, Cryptography Team</div>
+          <div class="tl-org">Thales &nbsp;&middot;&nbsp; Singapore</div>
+          <ul class="tl-points">
+            <li>Created a cross-platform JavaFX application for Deterministic Random Number Generation.</li>
+            <li>Implemented 257 passes per test, enhancing reliability of cryptographic tasks and UI.</li>
+          </ul>
+          <div class="out-tags" style="margin-top:6px;"><span class="out-tag">Java</span><span class="out-tag">JavaFX</span><span class="out-tag">Cryptography</span><span class="out-tag">DRNG</span></div>
+        </div>
+      </div>`
+  },
+  4: {
+    type:'rich',delay:800,
+    html:`
+      <div class="out-card-grid">
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title"><a href="https://github.com/ananyakapoor12/NETwork-Oncology_ML" target="_blank">Cancer Drug Target Discovery &mdash; NTU FYP</a></span>
+            <span class="out-card-badge">Aug 2025 &ndash; May 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>ML ranking framework using LightGBM, XGBoost, Random Forest, and network-science features.</li>
+            <li>Prioritized drug targets across breast and prostate cancer signaling networks.</li>
+            <li>Identified 566 novel target combinations; up to 86% Recall@1 for prostate cancer.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">LightGBM</span><span class="out-tag">XGBoost</span><span class="out-tag">Graph ML</span><span class="out-tag">Oncology</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title"><a href="https://github.com/ananyakapoor12/Distributed_Banking_System" target="_blank">Distributed Banking System &mdash; NTU</a></span>
+            <span class="out-card-badge">Jan &ndash; May 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Low-latency UDP-based distributed system with custom binary protocols.</li>
+            <li>At-most-once execution guarantees; 100% transaction consistency under 50% packet loss.</li>
+            <li>Request deduplication and response caching for fault tolerance.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">Java</span><span class="out-tag">UDP</span><span class="out-tag">Distributed Systems</span><span class="out-tag">Fault Tolerance</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title"><a href="https://github.com/Leonard249/SC4021-project" target="_blank">AI Opinion Search Engine &mdash; NTU IR</a></span>
+            <span class="out-card-badge">Jan &ndash; May 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>AI-powered search over 90K+ developer discussions; 69K+ indexed documents.</li>
+            <li>Combined BM25, embedding-based semantic retrieval, and hybrid search.</li>
+            <li>Integrated sentiment analysis, NER, aspect extraction, and sarcasm detection.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">BM25</span><span class="out-tag">Elasticsearch</span><span class="out-tag">Sentence Transformers</span><span class="out-tag">NLP</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title"><a href="https://github.com/weiizhxnng17/SC2079-2025-MDP-Grp22" target="_blank">Autonomous Robot Pathfinding &mdash; NTU MDP</a></span>
+            <span class="out-card-badge">Aug &ndash; Oct 2025</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Led multidisciplinary team of 8; optimized pathfinding for autonomous robot navigation.</li>
+            <li>Integrated turn-radius and obstacle-avoidance heuristics; reduced route cost by ~25%.</li>
+            <li>Improved traversal stability by over 30%.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">Algorithms</span><span class="out-tag">Pathfinding</span><span class="out-tag">Robotics</span><span class="out-tag">Team Lead</span></div>
+        </div>
+      </div>`
+  },
+  5: {
+    type:'rich',delay:800,
+    afterRender: true,
+    html:`
+      <div class="skill-cat-label">Languages</div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="92" style="width:0%"></div></div><span class="skill-pct">92%</span></div>
+      <div class="skill-row"><span class="skill-name">SQL</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="82" style="width:0%"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">Java / C / C++</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="78" style="width:0%"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="70" style="width:0%"></div></div><span class="skill-pct">70%</span></div>
+      <div class="skill-cat-label">AI / ML &amp; Data</div>
+      <div class="skill-row"><span class="skill-name">LLM Apps / RAG</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="88" style="width:0%"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">NLP</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="85" style="width:0%"></div></div><span class="skill-pct">85%</span></div>
+      <div class="skill-row"><span class="skill-name">Time Series Forecasting</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="82" style="width:0%"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">Graph ML</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="78" style="width:0%"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name">Scikit-learn / Pandas</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="88" style="width:0%"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">Reinforcement Learning</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="72" style="width:0%"></div></div><span class="skill-pct">72%</span></div>
+      <div class="skill-cat-label">Engineering &amp; Tools</div>
+      <div class="skill-row"><span class="skill-name">React / Node.js</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="75" style="width:0%"></div></div><span class="skill-pct">75%</span></div>
+      <div class="skill-row"><span class="skill-name">REST APIs / MongoDB</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="78" style="width:0%"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name">Elasticsearch</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="72" style="width:0%"></div></div><span class="skill-pct">72%</span></div>
+      <div class="skill-row"><span class="skill-name">Tableau / Power BI</span><div class="skill-bar-wrap"><div class="skill-bar-fill" data-pct="68" style="width:0%"></div></div><span class="skill-pct">68%</span></div>`
+  },
+  6: {
+    type:'rich',delay:600,
+    html:`
+      <div class="out-card-grid">
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">Finalist &mdash; Beyond Binary Hackathon</span>
+            <span class="out-card-badge">Mar 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>NTU Women in Tech 2026 &mdash; AI-driven workplace well-being platform.</li>
+            <li>Addressed unconscious bias and inclusion challenges using AI solution development.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">AI Product</span><span class="out-tag">Hackathon Finalist</span><span class="out-tag">Women in Tech</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">Morgan Stanley Insight Program</span>
+            <span class="out-card-badge">Aug 2024</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Invite-only Investment Banking &amp; Asset Management simulation for non-finance majors.</li>
+            <li>Applied quantitative reasoning, financial analysis, and data-driven decision-making.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">Investment Banking</span><span class="out-tag">Quant Finance</span><span class="out-tag">Invite-only</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">Finalist &mdash; UBS &times; NTU Women in Tech Ideathon</span>
+            <span class="out-card-badge">Mar 2024</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Technology-based recommendations to improve workplace equity and inclusion.</li>
+            <li>Presented to industry professionals; combined analytical research and business strategy.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">UBS</span><span class="out-tag">Hackathon Finalist</span><span class="out-tag">Women in Tech</span></div>
+        </div>
+        <div class="out-card">
+          <div class="out-card-header">
+            <span class="out-card-title">OGEM Ambassador &mdash; NTU Global Education</span>
+            <span class="out-card-badge">Jan 2025 &ndash; May 2026</span>
+          </div>
+          <ul class="out-card-points">
+            <li>Organized semester exchange fairs; mentored 10+ juniors through application processes.</li>
+            <li>Engaged in networking sessions with partner university leaders.</li>
+          </ul>
+          <div class="out-tags"><span class="out-tag">Leadership</span><span class="out-tag">Mentoring</span><span class="out-tag">Global Education</span></div>
+        </div>
+      </div>`
+  },
+  7: {
+    type:'rich',delay:400,
+    html:`
+      <div class="out-section">
+        <div class="out-kv"><span class="out-key">email</span><span class="out-val"><a href="mailto:ananya.kapoor.1103@gmail.com">ananya.kapoor.1103@gmail.com</a></span></div>
+        <div class="out-kv"><span class="out-key">github</span><span class="out-val"><a href="https://github.com/ananyakapoor12" target="_blank">github.com/ananyakapoor12</a></span></div>
+        <div class="out-kv"><span class="out-key">linkedin</span><span class="out-val"><a href="https://www.linkedin.com/in/ananyakapoor12/" target="_blank">linkedin.com/in/ananyakapoor12</a></span></div>
+      </div>
+      <div class="contact-links" style="margin-top:12px;">
+        <a class="contact-link" href="https://github.com/ananyakapoor12" target="_blank">GitHub</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/ananyakapoor12/" target="_blank">LinkedIn</a>
+        <a class="contact-link" href="mailto:ananya.kapoor.1103@gmail.com">Email</a>
+      </div>`
+  }
+};
+
+let execCounter = 0, runningCell = null, cellsRun = 0, focusedCell = null;
+
+function setKernelBusy(b){
+  document.getElementById('kernel-dot').className = b ? 'busy' : '';
+  document.getElementById('si-status').textContent = b ? 'busy' : 'idle';
+}
+function setStatus(msg){ document.getElementById('status-msg').textContent = msg; }
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+async function runCell(n){
+  if(runningCell !== null) return;
+  runningCell = n;
+  const cell = document.getElementById('cell-'+n);
+  const en   = document.getElementById('en-'+n);
+  const out  = document.getElementById('out-'+n);
+  const ob   = document.getElementById('ob-'+n);
+
+  focusCell(n);
+  cell.classList.add('running');
+  en.className = 'exec-num running';
+  en.textContent = 'In [*]:';
+  setKernelBusy(true);
+  setStatus('Executing cell '+n+'…');
+
+  const cfg = OUTPUTS[n];
+  await sleep(cfg.delay);
+
+  execCounter++;
+  cellsRun++;
+  en.className = 'exec-num done';
+  en.textContent = 'In ['+execCounter+']:';
+  cell.classList.remove('running');
+  document.getElementById('si-cells').textContent = cellsRun + ' / 7';
+
+  ob.innerHTML = cfg.html;
+  out.classList.add('visible');
+  if(cfg.afterRender){
+    setTimeout(()=>{
+      document.querySelectorAll('.skill-bar-fill').forEach(el=>{
+        el.style.width = el.dataset.pct + '%';
+      });
+    }, 80);
+  }
+
+  setKernelBusy(false);
+  runningCell = null;
+  setStatus('Cell '+n+' done ✓');
+}
+
+async function runAllCells(){
+  document.getElementById('run-hint').classList.add('done');
+  const bar = document.getElementById('exec-progress');
+  bar.style.opacity='1';
+  setStatus('Running all cells…');
+  for(let i=1;i<=7;i++){
+    bar.style.width=(i/7*100)+'%';
+    await runCell(i);
+    await sleep(150);
+  }
+  bar.style.width='100%';
+  setTimeout(()=>{bar.style.opacity='0';bar.style.width='0%';},700);
+  setStatus('All cells executed ✓  —  scroll down to explore');
+}
+
+function focusCell(n){
+  if(focusedCell !== null) document.getElementById('cell-'+focusedCell)?.classList.remove('focused');
+  focusedCell = n;
+  document.getElementById('cell-'+n)?.classList.add('focused');
+  document.getElementById('cell-count').textContent = 'Cell '+n+' of 7';
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.shiftKey && e.key==='Enter' && focusedCell > 0){
+    e.preventDefault();
+    runCell(focusedCell);
+    if(focusedCell < 7) focusCell(focusedCell+1);
+  }
+});
+</script>
+</body>
+</html>
